@@ -1,0 +1,24 @@
+
+.hero {
+  height: 80vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hero__illustration {
+  width: 30vw;
+}
+
+.hero__welcome {
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.hero__slogan {
+  font-weight: bold;
+  font-size: 3rem;
+  margin-top: 0.5rem;
+  width: 20ch;
+}

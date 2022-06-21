@@ -1,0 +1,35 @@
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.navbar__logo {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navbar__options {
+  list-style-type: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar__options a {
+  font-weight: bold;
+  color: black;
+}
+
+.navbar__options a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--primary);
+  text-decoration-thickness: 3px;
+}

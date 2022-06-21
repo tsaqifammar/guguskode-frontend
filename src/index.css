@@ -1,5 +1,17 @@
+/* General styles that is used throughout the whole application.  */
+
+/*
+  color variables
+  access with var(--var-name)
+*/
+:root {
+  --primary: #4154F1;
+  --primary-dark: #2536d3;
+}
+
 body {
   margin: 0;
+  box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -10,4 +22,27 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.logo {
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.btn-filled {
+  background-color: var(--primary);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  color: white;
+  transition: 0.3s;
+}
+
+.btn-filled:hover {
+  background-color: var(--primary-dark);
 }
