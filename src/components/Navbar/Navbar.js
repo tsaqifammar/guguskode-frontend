@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import options from './navbar_options';
 import './Navbar.css';
 
-function NavbarUser() {
+function Navbar() {
   // TODO: ambil info berdasarkan yang sedang log in (kalau belum, pakai 'user' aja)
   const currentLoggedIn = 'user';
 
@@ -23,4 +23,4 @@ function NavbarUser() {
   );
 }
 
-export default NavbarUser;
+export default Navbar;
