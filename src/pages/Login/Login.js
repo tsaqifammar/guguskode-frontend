@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { login } from '../../api/users';
+import { useUserContext } from '../../contexts/UserContext';
 import './Login.css';
 
 function Login() {
@@ -6,8 +8,16 @@ function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const onSubmit = (e) => {
+  const { setUser } = useUserContext();
+
+  const onSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const user = await login(identifier, password);
+      setUser(user);
+    } catch (error) {
+      setError('Login gagal');
+    }
   };
 
   return (
@@ -22,14 +32,26 @@ function Login() {
             <h1>Login</h1>
             <div className="login__formInput">
               <label>Username atau Email</label>
-              <input type="text" value={identifier} onChange={(e) => setIdentifier(e.value)} />
+              <input
+                type="text"
+                name="identifier"
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
+              />
             </div>
             <div className="login__formInput">
               <label>Password</label>
-              <input type="password" value={password} onChange={(e) => setPassword(e.value)} />
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
-            {error && <p style={{color: 'red'}}>{error}</p>}
-            <button type="submit" className="btn-filled">Masuk</button>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <button type="submit" className="btn-filled">
+              Masuk
+            </button>
           </form>
         </div>
       </div>
