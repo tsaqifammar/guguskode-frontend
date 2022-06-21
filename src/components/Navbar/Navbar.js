@@ -4,6 +4,7 @@ import './Navbar.css';
 
 function Navbar() {
   // TODO: ambil info berdasarkan yang sedang log in (kalau belum, pakai 'user' aja)
+  // antara 'user' atau 'admin'
   const currentLoggedIn = 'user';
 
   return (
@@ -11,8 +12,8 @@ function Navbar() {
       <h1 className="navbar__logo logo">GugusKode</h1>
       <div className="navbar__right">
         <ul className="navbar__options">
-          {options[currentLoggedIn].map((option) => (
-            <li>
+          {options[currentLoggedIn].map((option, idx) => (
+            <li key={idx}>
               <Link to={option.to}>{option.display}</Link>
             </li>
           ))}
