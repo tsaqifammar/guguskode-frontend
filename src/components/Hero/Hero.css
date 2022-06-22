@@ -1,24 +1,36 @@
 
 .hero {
-  height: 80vh;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.hero__illustration {
-  width: 30vw;
-}
-
-.hero__welcome {
-  font-size: 1.5rem;
-  margin: 0;
-  padding: 0;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .hero__slogan {
   font-weight: bold;
-  font-size: 3rem;
+  font-size: 2.3rem;
   margin-top: 0.5rem;
-  width: 20ch;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    height: 80vh;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hero__illustration {
+    width: 30vw;
+  }
+
+  .hero__welcome {
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .hero__slogan {
+    font-size: 3rem;
+    max-width: 20ch;
+  }
 }
