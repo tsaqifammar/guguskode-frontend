@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { login } from '../../api/users';
+import { useNavigate, Link } from 'react-router-dom';
+import { getProfile, login } from '../../api/users';
 import { useUserContext } from '../../contexts/UserContext';
 import './Login.css';
 
@@ -9,12 +10,15 @@ function Login() {
   const [error, setError] = useState('');
 
   const { setUser } = useUserContext();
+  const navigate = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
       const user = await login(identifier, password);
-      setUser(user);
+      const profile = await getProfile(user.token);
+      setUser({ ...user, role: profile.role.name });
+      navigate('/');
     } catch (error) {
       setError('Login gagal');
     }
@@ -52,6 +56,10 @@ function Login() {
             <button type="submit" className="btn-filled">
               Masuk
             </button>
+            <div className="login__goRegister">
+              <p>Belum Memiliki Akun?</p>
+              <Link to="/register">Register</Link>
+            </div>
           </form>
         </div>
       </div>

@@ -41,6 +41,10 @@
   text-align: center;
 }
 
+.login__goRegister { text-align: center; }
+.login__goRegister a { color: var(--primary); }
+.login__goRegister a:hover { color: var(--primary-dark); }
+
 @media (min-width: 640px) {
   .login__right form {
     width: 30vw;

@@ -1,24 +1,33 @@
 import { Link } from 'react-router-dom';
+import { FaRegUserCircle } from 'react-icons/fa';
+import { useUserContext } from '../../contexts/UserContext';
 import options from './navbar_options';
 import './Navbar.css';
 
 function Navbar() {
-  // TODO: ambil info berdasarkan yang sedang log in (kalau belum, pakai 'user' aja)
-  // antara 'user' atau 'admin'
-  const currentLoggedIn = 'user';
+  const { user } = useUserContext();
+  const role = user ? user.role : 'User';
 
   return (
     <div className="navbar">
       <h1 className="navbar__logo logo">GugusKode</h1>
       <div className="navbar__right">
         <ul className="navbar__options">
-          {options[currentLoggedIn].map((option, idx) => (
+          {options[role].map((option, idx) => (
             <li key={idx}>
               <Link to={option.to}>{option.display}</Link>
             </li>
           ))}
         </ul>
-        <Link className="btn-filled navbar__login" to="/login">Masuk</Link>
+        {user ? (
+          <Link to="/profile">
+            <FaRegUserCircle style={{verticalAlign: 'middle'}} size={25} />
+          </Link>
+        ) : (
+          <Link className="btn-filled navbar__login" to="/login">
+            Masuk
+          </Link>
+        )}
       </div>
     </div>
   );
