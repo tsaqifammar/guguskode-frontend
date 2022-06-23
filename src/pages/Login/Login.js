@@ -16,8 +16,8 @@ function Login() {
     e.preventDefault();
     try {
       const user = await login(identifier, password);
-      const profile = await getProfile(user.token);
-      setUser({ ...user, role: profile.role.name });
+      const profile = await getProfile(user.id, user.token);
+      setUser(profile);
       navigate('/');
     } catch (error) {
       setError('Login gagal');
