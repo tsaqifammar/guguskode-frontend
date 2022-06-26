@@ -2,10 +2,22 @@ import axios from './axios';
 import qs from 'qs';
 import { formatDate } from '../utilities/formatData';
 
+async function getCategories() {
+  const response = await axios.get('/topics');
+  const data = response.data.data;
+  return data.map((c) => ({
+    id: c.id,
+    name: c.attributes.name
+  }));
+}
+
 async function getArticleById(id) {
   const query = qs.stringify({
     populate: {
-      category: { fields: ['name'] },
+      category: {
+        fields: ['name'],
+        populate: ['topic']
+      },
       author: {
         fields: ['name'],
         populate: ['profile_picture']
@@ -23,6 +35,7 @@ async function getArticleById(id) {
     id: data.id,
     title: data.attributes.title,
     content: data.attributes.content,
+    topic: data.attributes.category.data.attributes.topic.data.attributes.name,
     category: data.attributes.category.data.attributes.name,
     author: {
       name: data.attributes.author.data.attributes.name,
@@ -33,4 +46,4 @@ async function getArticleById(id) {
   };
 }
 
-export { getArticleById };
+export { getCategories, getArticleById };
