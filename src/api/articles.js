@@ -2,7 +2,7 @@ import axios from './axios';
 import qs from 'qs';
 import { formatDate } from '../utilities/formatData';
 
-async function getCategories() {
+async function getTopics() {
   const response = await axios.get('/topics');
   const data = response.data.data;
   return data.map((c) => ({
@@ -46,4 +46,4 @@ async function getArticleById(id) {
   };
 }
 
-export { getCategories, getArticleById };
+export { getTopics, getArticleById };
