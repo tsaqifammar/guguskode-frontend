@@ -33,9 +33,10 @@ function Article() {
       <div className="article">
         <div className="container-80">
           <div className="article__card" data-color-mode="light">
-            {error && <h3>{error}</h3>}
             {isLoading ? (
               <LoadingSpinner />
+            ) : error ? (
+              <h3>{error}</h3>
             ) : (
               <>
                 <div className="article__meta">
