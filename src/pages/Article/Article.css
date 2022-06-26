@@ -1,0 +1,49 @@
+.article {
+  background-color: var(--light-grey);
+  padding: 4rem 0;
+}
+
+.article__card {
+  background-color: white;
+  min-height: 100vh;
+  max-width: 100%;
+  padding: 2rem;
+  border-radius: 2rem;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.article__card h1 {
+  font-size: 2.5rem;
+}
+
+.article__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.article__meta p {
+  margin: 0;
+  color: grey;
+}
+
+.article__meta img {
+  height: 30px;
+  border-radius: 50%;
+}
+
+.article__author {
+  flex-grow: 1;
+}
+
+.article__thumbnail {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .article__card {
+    max-width: 60%;
+  }
+}

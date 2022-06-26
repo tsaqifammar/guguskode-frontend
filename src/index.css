@@ -8,6 +8,7 @@
   --primary: #4154F1;
   --primary-dark: #2536d3;
   --dark-grey: #362E2E;
+  --light-grey: #f8fafc;
 }
 
 body {
@@ -33,6 +34,12 @@ a {
 .logo {
   color: var(--primary);
   font-weight: bold;
+}
+
+.container-80 {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .btn-filled {

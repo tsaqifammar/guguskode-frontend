@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UserProvider } from './contexts/UserContext';
 import AdminDashboard from './pages/AdminDashboard';
+import Article from './pages/Article';
 import Belajar from './pages/Belajar';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -17,6 +18,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/belajar/:topic/:category" element={<Belajar />} />
+          <Route path="/article/:id" element={<Article />} />
           <Route path="/tulis/:status" element={<Tulis />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/profile" element={<Profile />} />
