@@ -7,7 +7,8 @@ async function getTopics() {
   const data = response.data.data;
   return data.map((c) => ({
     id: c.id,
-    name: c.attributes.name
+    name: c.attributes.name,
+    code: c.attributes.code
   }));
 }
 
@@ -22,7 +23,7 @@ async function getArticleById(id) {
         fields: ['name'],
         populate: ['profile_picture']
       },
-      thumbnail: { fields: ['formats'] }
+      thumbnail: { fields: ['url'] }
     }
   }, {
     encodeValuesOnly: true,
@@ -39,9 +40,9 @@ async function getArticleById(id) {
     category: data.attributes.category.data.attributes.name,
     author: {
       name: data.attributes.author.data.attributes.name,
-      profile_picture: data.attributes.author.data.attributes.profile_picture.data.attributes.formats.thumbnail.url
+      profile_picture: data.attributes.author.data.attributes.profile_picture.data.attributes.url
     },
-    thumbnail: data.attributes.thumbnail.data.attributes.formats.medium.url,
+    thumbnail: data.attributes.thumbnail.data.attributes.url,
     createdAt: formatDate(data.attributes.createdAt)
   };
 }
