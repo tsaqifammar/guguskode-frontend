@@ -22,8 +22,6 @@ async function getProfile(id, token) {
     email: data.email,
     name: data.name,
     role: data.role.name,
-    thumbnailAvatar: data.profile_picture?.formats.thumbnail.url,
-    smallAvatar: data.profile_picture?.formats.small.url,
     avatar: data.profile_picture?.url,
   };
 }
