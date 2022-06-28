@@ -18,6 +18,8 @@ function Login() {
       const user = await login(identifier, password);
       const profile = await getProfile(user.id, user.token);
       setUser(profile);
+      localStorage.setItem('user', JSON.stringify(profile));
+
       navigate('/');
     } catch (error) {
       setError('Login gagal');
