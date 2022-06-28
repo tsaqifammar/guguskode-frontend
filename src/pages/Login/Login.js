@@ -17,8 +17,11 @@ function Login() {
     try {
       const user = await login(identifier, password);
       const profile = await getProfile(user.id, user.token);
-      setUser(profile);
-      localStorage.setItem('user', JSON.stringify(profile));
+      setUser({ ...profile, token: user.token });
+      localStorage.setItem(
+        'user',
+        JSON.stringify({ ...profile, token: user.token })
+      );
 
       navigate('/');
     } catch (error) {
