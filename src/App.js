@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UserProvider } from './contexts/UserContext';
+import AdminArticle from './pages/AdminArticle/AdminArticle';
 import AdminDashboard from './pages/AdminDashboard';
 import Article from './pages/Article';
 import ArticleEdit from './pages/ArticleEdit/ArticleEdit';
@@ -23,6 +24,7 @@ function App() {
           <Route path="/article-edit/:id" element={<ArticleEdit />} />
           <Route path="/tulis/:status" element={<Tulis />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/article/:id" element={<AdminArticle />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </UserProvider>
