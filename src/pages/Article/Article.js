@@ -1,11 +1,21 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useUserContext } from '../../contexts/UserContext';
+import { CommentSection } from 'react-comments-section';
 import { getArticleById } from '../../api/articles';
-import { getCommentsByArticleId } from '../../api/comments';
+import {
+  deleteComment,
+  editComment,
+  getCommentsByArticleId,
+  postComment,
+  postSubcomment,
+} from '../../api/comments';
 import ArticleViewer from '../../components/ArticleViewer';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import Navbar from '../../components/Navbar';
 import './Article.css';
+import 'react-comments-section/dist/index.css';
+import { DEFAULT_PROFILE_PICTURE } from '../../utilities/defaults';
 
 function Article() {
   const { id } = useParams();
@@ -13,6 +23,13 @@ function Article() {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+
+  const { user } = useUserContext();
+  const currentUser = {
+    currentUserId: user.id,
+    currentUserImg: user.avatar || DEFAULT_PROFILE_PICTURE,
+    currentUserFullName: user.name,
+  };
 
   useEffect(() => {
     async function getData() {
@@ -44,7 +61,6 @@ function Article() {
               <h3>{error}</h3>
             ) : (
               <>
-                <pre>{JSON.stringify(comments, '\t', 2)}</pre>
                 <div className="article__meta">
                   <img src={article.author.profile_picture} alt="author" />
                   <p className="article__author">{article.author.name}</p>
@@ -58,6 +74,22 @@ function Article() {
                 />
                 <ArticleViewer content={article.content} />
               </>
+            )}
+          </div>
+          <div className="article__comments">
+            {!isLoading && !error && (
+              <CommentSection
+                currentUser={currentUser}
+                logIn={{
+                  loginLink: '/login',
+                  signupLink: '/register',
+                }}
+                commentData={comments}
+                onSubmitAction={(data) => postComment(user.token, id, data)}
+                onReplyAction={(data) => postSubcomment(user.token, data)}
+                onEditAction={(data) => editComment(user.token, data)}
+                onDeleteAction={(data) => deleteComment(user.token, data)}
+              />
             )}
           </div>
         </div>

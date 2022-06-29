@@ -42,8 +42,17 @@
   margin-bottom: 1rem;
 }
 
+.postBtn {
+  background-color: var(--primary) !important;
+  border-style: none !important;
+}
+
+.postBtn:hover {
+  background-color: var(--primary-dark) !important;
+}
+
 @media (min-width: 1024px) {
-  .article__card {
+  .article__card, .article__comments {
     max-width: 60%;
   }
 }
