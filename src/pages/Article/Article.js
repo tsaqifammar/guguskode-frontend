@@ -25,7 +25,7 @@ function Article() {
   const [error, setError] = useState('');
 
   const { user } = useUserContext();
-  const currentUser = {
+  const currentUser = user && {
     currentUserId: user.id,
     currentUserImg: user.avatar || DEFAULT_PROFILE_PICTURE,
     currentUserFullName: user.name,

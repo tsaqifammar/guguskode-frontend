@@ -23,7 +23,7 @@ function Login() {
         JSON.stringify({ ...profile, token: user.token })
       );
 
-      navigate('/');
+      navigate(-1);
     } catch (error) {
       setError('Login gagal');
     }
