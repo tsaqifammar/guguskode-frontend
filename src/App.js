@@ -10,7 +10,6 @@ import Login from './pages/Login';
 import Profile from './pages/Profile/Profile';
 import Register from './pages/Register';
 import Tulis from './pages/Tulis';
-import ArticlesTable from './components/ArticlesTable/ArticleTable';
 
 function App() {
   return (
@@ -27,7 +26,6 @@ function App() {
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/article/:id" element={<AdminArticle />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/ArticlesTable" element={<ArticlesTable />} />
         </Routes>
       </UserProvider>
     </BrowserRouter>

@@ -48,6 +48,39 @@ async function getArticleById(id) {
   };
 }
 
+async function getArticlesWithStatusPublishedOrSubmitted() {
+  const query = qs.stringify({
+    populate: {
+      category: {
+        fields: ['name'],
+        populate: { topic: { fields: ['name'] } },
+      },
+      author: { fields: ['name'] }
+    }, 
+    filters: {
+      $or: [
+        { status: { $eq: 'published' } },
+        { status: { $eq: 'submitted' } }
+      ],
+    },
+  }, {
+    encodeValuesOnly: true,
+  });
+
+  const response = await axios.get(`/articles?${query}`);
+  const data = response.data.data;
+
+  return data.map(a => ({
+    id: a.id,
+    createdAt: formatDate(a.attributes.createdAt),
+    title: a.attributes.title,
+    author: a.attributes.author.data.attributes.name,
+    topic: a.attributes.category.data.attributes.topic.data.attributes.name,
+    category: a.attributes.category.data.attributes.name,
+    status: a.attributes.status,
+  }));
+}
+
 async function findCategoryId(category, topic) {
   // find category id
   const query = qs.stringify({
@@ -117,9 +150,19 @@ async function updateArticleStatus(token, article_id, status) {
   });
 }
 
+async function deleteArticleById(token, id) {
+  await axios.delete(`/articles/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
 export {
   getTopics,
   getArticleById,
+  getArticlesWithStatusPublishedOrSubmitted,
   saveArticle,
-  updateArticleStatus
+  updateArticleStatus,
+  deleteArticleById,
 };
