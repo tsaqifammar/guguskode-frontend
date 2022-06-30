@@ -26,4 +26,27 @@ async function getProfile(id, token) {
   };
 }
 
-export { login, getProfile };
+async function updateProfile(token, user_id, updatedData, newProfilePic) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  await axios.put(`/users/${user_id}`, updatedData, config);
+
+  if (newProfilePic) {
+    // remove previous profile pic first...
+    await axios.put(`/users/${user_id}`, { profile_picture: null }, config);
+
+    const fd = new FormData();
+    fd.append('files', newProfilePic);
+    fd.append('ref', 'plugin::users-permissions.user');
+    fd.append('refId', user_id);
+    fd.append('field', 'profile_picture');
+
+    await axios.post('/upload', fd, config);
+  }
+}
+
+export { login, getProfile, updateProfile };
