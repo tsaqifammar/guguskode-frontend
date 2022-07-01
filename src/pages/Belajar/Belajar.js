@@ -1,12 +1,22 @@
 import { useParams } from 'react-router-dom';
+import Footer from "../../Component/Footer";
+import Hero from "../../Component/Hero";
+import Navbar from "../../Component/Navbar";
+import TopicNav from "../../Component/TopicNav";
 
 function Belajar() {
   const { topic, category } = useParams();
 
   return (
-    <div>
-      <h1>Belajar {topic} dengan kategori {category}</h1>
-    </div>
+    <>
+      <div>
+        <Navbar />
+        <TopicNav />
+        <Hero />
+        <Card />
+        <Footer />
+      </div>
+    </>
   );
 }
 
