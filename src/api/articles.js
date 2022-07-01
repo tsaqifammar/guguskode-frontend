@@ -3,6 +3,23 @@ import qs from 'qs';
 import { formatDate, titleCase, truncate } from '../utilities/formatData';
 import { DEFAULT_PROFILE_PICTURE } from '../utilities/defaults';
 
+async function createEmptyArticle(token, user_id) {
+  const response = await axios.post('/articles', {
+    data: {
+      title: 'judul',
+      content: 'tulis konten disini...',
+      status: 'draft',
+      author: user_id
+    },
+  }, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = response.data.data;
+  return data.id;
+}
+
 async function getTopics() {
   const response = await axios.get('/topics');
   const data = response.data.data;
@@ -37,8 +54,8 @@ async function getArticleById(id) {
     id: data.id,
     title: data.attributes.title,
     content: data.attributes.content,
-    topic: data.attributes.category.data.attributes.topic.data.attributes.name,
-    category: data.attributes.category.data.attributes.name,
+    topic: data.attributes?.category.data?.attributes.topic.data?.attributes.name,
+    category: data.attributes?.category.data?.attributes.name,
     author: {
       name: data.attributes.author.data.attributes.name,
       profile_picture: data.attributes.author.data.attributes.profile_picture?.data?.attributes.url || DEFAULT_PROFILE_PICTURE
@@ -118,6 +135,48 @@ async function getArticlesByTopicAndCategory(topic, category) {
     title: a.attributes.title,
     description: truncate(a.attributes.content),
     thumbnail: a.attributes.thumbnail.data.attributes.url,
+    author: {
+      name: a.attributes.author.data.attributes.name,
+      profile_picture: a.attributes.author.data.attributes.profile_picture?.data?.attributes.url || DEFAULT_PROFILE_PICTURE
+    }
+  }));
+}
+
+async function getUsersArticlesByStatus(id_user, status) {
+  const query = qs.stringify({
+    filters: {
+      author: {
+        id: {
+          $eq: id_user,
+        },
+      },
+      status: {
+        $eq: status
+      },
+    },
+    populate: {
+      thumbnail: {
+        fields: ['url'],
+      },
+      author: {
+        fields: ['name'],
+        populate: {
+          profile_picture: {
+            fields: ['url'],
+          },
+        },
+      },
+    },
+  }, {
+    encodeValuesOnly: true,
+  });
+  const response = await axios.get(`/articles?${query}`);
+  const data = response.data.data;
+  return data.map((a) => ({
+    id: a.id,
+    title: a.attributes.title,
+    description: truncate(a.attributes.content),
+    thumbnail: a.attributes.thumbnail?.data?.attributes?.url,
     author: {
       name: a.attributes.author.data.attributes.name,
       profile_picture: a.attributes.author.data.attributes.profile_picture?.data?.attributes.url || DEFAULT_PROFILE_PICTURE
@@ -214,10 +273,12 @@ async function deleteArticleById(token, id) {
 }
 
 export {
+  createEmptyArticle,
   getTopics,
   getArticleById,
   getArticlesWithStatusPublishedOrSubmitted,
   getArticlesByTopicAndCategory,
+  getUsersArticlesByStatus,
   saveArticle,
   updateArticleStatus,
   deleteArticleById,

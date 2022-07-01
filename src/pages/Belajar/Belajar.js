@@ -63,11 +63,12 @@ function Belajar() {
                   {articles.map((a) => (
                     <ArticleCard
                       key={a.id}
-                      id={a.id}
                       image={a.thumbnail}
                       author={a.author.name}
                       title={a.title}
                       description={a.description}
+                      to={`/articles/${a.id}`}
+                      buttonText="Baca"
                     />
                   ))}
                 </div>

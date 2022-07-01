@@ -30,7 +30,6 @@ function ArticleEdit() {
         setTopics(ts);
         setArticle(a);
       } catch (error) {
-        console.log({ error });
         setError('Gagal mendapatkan artikel');
       }
       setIsLoading(false);
