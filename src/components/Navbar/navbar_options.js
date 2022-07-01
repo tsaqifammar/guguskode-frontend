@@ -1,10 +1,10 @@
 const options = {
-  user: [
+  User: [
     { display: "Home", to: "/" },
-    { display: "Belajar", to: "/belajar" },
-    { display: "Tulis", to: "/tulis" },
+    { display: "Belajar", to: "/belajar/html/pemula" },
+    { display: "Tulis", to: "/tulis/draft" },
   ],
-  admin: [
+  Admin: [
     { display: "Home", to: "/" },
     { display: "Artikel", to: "/admin" },
   ]

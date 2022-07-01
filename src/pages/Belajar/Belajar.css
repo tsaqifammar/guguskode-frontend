@@ -1,0 +1,41 @@
+
+.belajar {
+  background-color: var(--light-grey);
+  position: relative;
+  min-height: 90vh;
+}
+
+.belajar__grid {
+  display: grid;
+  gap: 3rem;
+  width: 100%;
+  grid-template-columns: 1fr;
+  margin-bottom: 2rem;
+}
+
+.belajar__selectCategory {
+  background-color: white;
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  padding-right: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+@media (min-width: 640px) {
+  .belajar__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .belajar__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

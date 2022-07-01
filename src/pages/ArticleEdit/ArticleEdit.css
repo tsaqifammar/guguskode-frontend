@@ -1,0 +1,48 @@
+
+.articleEdit {
+  background-color: var(--light-grey);
+  padding: 4rem 0;
+}
+
+.articleEdit label {
+  color: gray;
+}
+
+.articleEdit__title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.articleEdit__title input {
+  padding: 0.5rem;
+  width: 50ch;
+  font-weight: bold;
+}
+
+.articleEdit__meta {
+  padding: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.articleEdit__info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.articleEdit__info label:not(:first-child) {
+  margin-left: 0.5rem;
+}
+
+.articleEdit__info select {
+  padding: 0.25rem;
+}
+
+.articleEdit__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}

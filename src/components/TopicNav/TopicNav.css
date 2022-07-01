@@ -1,0 +1,33 @@
+
+.topic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1 0;
+    background-color: #4169E1;
+  }
+  
+  .topic__center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .topic__options {
+    list-style-type: none;
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .topic__options a {
+    font-weight: bold;
+    color: white;
+  }
+  
+  .topic__options a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 3px;
+  }
+  

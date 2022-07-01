@@ -1,28 +1,21 @@
+
 .login {
   background-color: #F5F5F5;
 }
 
 .login__container {
+  width: 90%;
   height: 100vh;
-  width: 80%;
   margin: 0 auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-}
-
-.login__left h1 {
-  font-size: 2.5rem;
-}
-
-.login__left p {
-  font-size: 1.5rem;
-  width: 30ch;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .login__right form {
   background-color: white;
-  width: 30vw;
   padding: 2rem;
   border-radius: 1rem;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -44,3 +37,35 @@
   padding: 0.5rem;
 }
 
+.login__left {
+  text-align: center;
+}
+
+.login__goRegister { text-align: center; }
+.login__goRegister a { color: var(--primary); }
+.login__goRegister a:hover { color: var(--primary-dark); }
+
+@media (min-width: 640px) {
+  .login__right form {
+    width: 30vw;
+  }
+
+  .login__container {
+    width: 80%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .login__left {
+    text-align: initial;
+  }
+
+  .login__left h1 {
+    font-size: 2.5rem;
+  }
+
+  .login__left p {
+    font-size: 1.5rem;
+    max-width: 30ch;
+  }
+}

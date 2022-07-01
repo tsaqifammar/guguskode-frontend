@@ -1,9 +1,8 @@
-
 .navbar {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  padding: 1rem 0;
+  padding-bottom: 1rem;
 }
 
 .navbar__logo {
@@ -32,4 +31,12 @@
   text-decoration: underline;
   text-decoration-color: var(--primary);
   text-decoration-thickness: 3px;
+}
+
+@media (min-width: 640px) {
+  .navbar {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem 0;
+  }
 }

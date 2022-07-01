@@ -7,6 +7,8 @@
 :root {
   --primary: #4154F1;
   --primary-dark: #2536d3;
+  --dark-grey: #362E2E;
+  --light-grey: #f8fafc;
 }
 
 body {
@@ -34,6 +36,12 @@ a {
   font-weight: bold;
 }
 
+.container-80 {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .btn-filled {
   cursor: pointer;
   border-style: none;
@@ -47,4 +55,35 @@ a {
 
 .btn-filled:hover {
   background-color: var(--primary-dark);
+}
+
+.btn-outline {
+  cursor: pointer;
+  border-style: solid;
+  border-color: var(--primary);
+  color: var(--primary);
+  background-color: rgba(0, 0, 0, 0);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-outline:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.btn-filled-danger {
+  cursor: pointer;
+  border-style: none;
+  background-color: #e03636;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  color: white;
+  transition: 0.3s;
+}
+
+.btn-filled-danger:hover {
+  background-color: #c71b1b;
 }
