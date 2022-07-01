@@ -40,6 +40,7 @@ function Article() {
         setArticle(as);
         setComments(cs);
       } catch (error) {
+        console.log(error);
         setError('Gagal mendapatkan artikel');
       }
       setIsLoading(false);

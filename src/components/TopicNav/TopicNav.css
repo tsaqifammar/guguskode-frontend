@@ -1,7 +1,7 @@
 
 .topic {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 1 0;
     background-color: #4169E1;
@@ -10,6 +10,7 @@
   .topic__center {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 2rem;
   }
   

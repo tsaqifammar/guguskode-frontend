@@ -1,6 +1,6 @@
 import axios from './axios';
 import qs from 'qs';
-import { formatDate } from '../utilities/formatData';
+import { formatDate, titleCase, truncate } from '../utilities/formatData';
 import { DEFAULT_PROFILE_PICTURE } from '../utilities/defaults';
 
 async function getTopics() {
@@ -41,7 +41,7 @@ async function getArticleById(id) {
     category: data.attributes.category.data.attributes.name,
     author: {
       name: data.attributes.author.data.attributes.name,
-      profile_picture: data.attributes.author.data.attributes.profile_picture?.data.attributes.url || DEFAULT_PROFILE_PICTURE
+      profile_picture: data.attributes.author.data.attributes.profile_picture?.data?.attributes.url || DEFAULT_PROFILE_PICTURE
     },
     thumbnail: data.attributes.thumbnail?.data?.attributes?.url,
     createdAt: formatDate(data.attributes.createdAt)
@@ -81,19 +81,74 @@ async function getArticlesWithStatusPublishedOrSubmitted() {
   }));
 }
 
+async function getArticlesByTopicAndCategory(topic, category) {
+  const categoryId = await findCategoryId(category, topic);
+  const query = qs.stringify({
+    filters: {
+      category: {
+        id: {
+          $eq: categoryId,
+        },
+      },
+      status: {
+        $eq: 'published'
+      },
+    },
+    populate: {
+      thumbnail: {
+        fields: ['url'],
+      },
+      author: {
+        fields: ['name'],
+        populate: {
+          profile_picture: {
+            fields: ['url'],
+          },
+        }
+      },
+    },
+  }, {
+    encodeValuesOnly: true,
+  });
+
+  const response = await axios.get(`/articles?${query}`);
+  const data = response.data.data;
+  return data.map((a) => ({
+    id: a.id,
+    title: a.attributes.title,
+    description: truncate(a.attributes.content),
+    thumbnail: a.attributes.thumbnail.data.attributes.url,
+    author: {
+      name: a.attributes.author.data.attributes.name,
+      profile_picture: a.attributes.author.data.attributes.profile_picture?.data?.attributes.url || DEFAULT_PROFILE_PICTURE
+    }
+  }));
+}
+
 async function findCategoryId(category, topic) {
   // find category id
   const query = qs.stringify({
     filters: {
       name: {
-        $eq: category
+        $eq: titleCase(category)
       },
-      topic: {
-        name: {
-          $eq: topic
-        }
-      }
-    }
+      $or: [
+        {
+          topic: {
+            name: {
+              $eq: topic
+            },
+          },
+        },
+        {
+          topic: {
+            code: {
+              $eq: topic
+            },
+          },
+        },
+      ],
+    },
   }, {
     encodeValuesOnly: true,
   });
@@ -162,6 +217,7 @@ export {
   getTopics,
   getArticleById,
   getArticlesWithStatusPublishedOrSubmitted,
+  getArticlesByTopicAndCategory,
   saveArticle,
   updateArticleStatus,
   deleteArticleById,

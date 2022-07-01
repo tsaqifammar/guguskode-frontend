@@ -1,54 +1,33 @@
 
-
-.card-group {
-    justify-content: center;
+.articleCard {
+  max-width: 100%;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  transition: all;
+  transition-property: all;
+  transition-duration: 150ms;
 }
 
-.card-grid, .card {
-    padding: 5px 5px !important;
-    height: auto !important;
-    justify-content: center;
-    margin: 2rem;
-    overflow: hidden;
-    box-shadow: 0 2px 10px ;
+.articleCard:hover {
+  transform: scale(1.01);
 }
 
-.card-body {
-    background-color: #F6F5F5;
-    margin: 0;
+.articleCard img { max-width: 100%; }
+
+.articleCard__info { padding: 1rem; }
+.articleCard__author {
+  font-size: 0.75rem;
+  color: grey;
+  margin: 0;
 }
-
-.card-img {
-    height: 10rem;
-    width: auto;
-    align-content: flex-start;
-    height: 12rem;
-    width: 100%;
-    object-fit: cover;
-    
+.articleCard__title {
+  font-size: 1.6rem;
+  margin: 0;
 }
-
-.card-text {
-    height: fit-content;
-    margin-bottom: 2rem;
-    color:black;
-
+.articleCard__description {
+  font-size: 0.9rem;
+  color: darkslategray;
 }
-.card_title {
-    padding: 1rem;
-  }
-
-.card_description {
-    padding: 0 1rem;
-  }
-
-.btn, .btn-primary {
-    position: left;
-    bottom: 5px;
-    color: #263238;
-    overflow: auto;
+.articleCard__baca {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
 }
-
-card:hover {
-    transform: scale(1.02);
-  }
