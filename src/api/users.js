@@ -1,5 +1,10 @@
 import axios from './axios';
 
+async function register(data) {
+  const response = await axios.post('/auth/local/register', data);
+  return response.data;
+}
+
 async function login(identifier, password) {
   const response = await axios.post('/auth/local', {
     identifier,
@@ -49,4 +54,4 @@ async function updateProfile(token, user_id, updatedData, newProfilePic) {
   }
 }
 
-export { login, getProfile, updateProfile };
+export { register, login, getProfile, updateProfile };
