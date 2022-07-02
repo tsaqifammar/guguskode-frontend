@@ -27,6 +27,10 @@
   color: black;
 }
 
+.navbar__profile {
+  height: 25px;
+}
+
 .navbar__options a:hover {
   text-decoration: underline;
   text-decoration-color: var(--primary);

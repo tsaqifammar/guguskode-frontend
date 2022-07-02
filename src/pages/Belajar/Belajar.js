@@ -19,14 +19,23 @@ function Belajar() {
     id: t.id,
     to: `/belajar/${t.code}/${category}`,
     display: t.name,
+    val: t.code,
   }));
   topicOptions.sort((a, b) => a.id - b.id);
 
   const categoryOptions = [
-    { display: 'Pemula', path: `/belajar/${topic}/pemula` },
-    { display: 'Menengah', path: `/belajar/${topic}/menengah` },
-    { display: 'Tingkat Akhir', path: `/belajar/${topic}/tingkat-akhir` },
-    { display: 'Project', path: `/belajar/${topic}/project` },
+    { display: 'Pemula', path: `/belajar/${topic}/pemula`, val: 'pemula' },
+    {
+      display: 'Menengah',
+      path: `/belajar/${topic}/menengah`,
+      val: 'menengah',
+    },
+    {
+      display: 'Tingkat Akhir',
+      path: `/belajar/${topic}/tingkat-akhir`,
+      val: 'tingkat-akhir',
+    },
+    { display: 'Project', path: `/belajar/${topic}/project`, val: 'project' },
   ];
 
   useEffect(() => {
@@ -52,11 +61,23 @@ function Belajar() {
           <Navbar />
         </div>
         <div className="belajar">
+          <TopicNav options={topicOptions} selected={topic} />
+          <div className="belajar__selectCategory">
+            <h2>Kategori</h2>
+            {categoryOptions.map((c, idx) => (
+              <Link
+                key={idx}
+                style={{ fontWeight: c.val === category ? 'bold' : 'normal' }}
+                to={c.path}
+              >
+                {c.display}
+              </Link>
+            ))}
+          </div>
           {isLoading ? (
             <LoadingSpinner />
           ) : (
             <>
-              <TopicNav options={topicOptions} />
               <div className="container-80">
                 <h1>Artikel terkait {topic}</h1>
                 <div className="belajar__grid">
@@ -67,15 +88,9 @@ function Belajar() {
                       author={a.author.name}
                       title={a.title}
                       description={a.description}
-                      to={`/articles/${a.id}`}
+                      to={`/article/${a.id}`}
                       buttonText="Baca"
                     />
-                  ))}
-                </div>
-                <div className="belajar__selectCategory">
-                  <h2>Kategori</h2>
-                  {categoryOptions.map((c, idx) => (
-                    <Link key={idx} to={c.path}>{c.display}</Link>
                   ))}
                 </div>
               </div>

@@ -35,9 +35,9 @@ export function Tulis() {
   }, [status, user]);
 
   const writingOptions = [
-    { display: 'Draft', to: '/tulis/draft' },
-    { display: 'Submitted', to: '/tulis/submitted' },
-    { display: 'Published', to: '/tulis/published' },
+    { display: 'Draft', to: '/tulis/draft', val: 'draft' },
+    { display: 'Submitted', to: '/tulis/submitted', val: 'submitted' },
+    { display: 'Published', to: '/tulis/published', val: 'published' },
   ];
 
   const createArticle = async () => {
@@ -54,7 +54,7 @@ export function Tulis() {
       <div className="container-80">
         <Navbar />
       </div>
-      <TopicNav options={writingOptions} />
+      <TopicNav options={writingOptions} selected={status} />
       <div className="tulis">
         <div className="container-80">
           <div className="tulis__header">
