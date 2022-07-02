@@ -5,6 +5,7 @@ import ArticleViewer from '../../components/ArticleViewer';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import Navbar from '../../components/Navbar';
 import { useUserContext } from '../../contexts/UserContext';
+import { DEFAULT_ARTICLE_THUMBNAIL } from '../../utilities/defaults';
 import './AdminArticle.css';
 
 function AdminArticle() {
@@ -86,7 +87,7 @@ function AdminArticle() {
                 <h1>{article.title}</h1>
                 <img
                   className="adminArticle__thumbnail"
-                  src={article.thumbnail}
+                  src={article.thumbnail || DEFAULT_ARTICLE_THUMBNAIL}
                   alt="thumbnail"
                 />
                 <ArticleViewer content={article.content} />

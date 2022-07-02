@@ -15,7 +15,7 @@ import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import Navbar from '../../components/Navbar';
 import './Article.css';
 import 'react-comments-section/dist/index.css';
-import { DEFAULT_PROFILE_PICTURE } from '../../utilities/defaults';
+import { DEFAULT_ARTICLE_THUMBNAIL, DEFAULT_PROFILE_PICTURE } from '../../utilities/defaults';
 
 function Article() {
   const { id } = useParams();
@@ -70,7 +70,7 @@ function Article() {
                 <h1>{article.title}</h1>
                 <img
                   className="article__thumbnail"
-                  src={article.thumbnail}
+                  src={article.thumbnail || DEFAULT_ARTICLE_THUMBNAIL}
                   alt="thumbnail"
                 />
                 <ArticleViewer content={article.content} />
