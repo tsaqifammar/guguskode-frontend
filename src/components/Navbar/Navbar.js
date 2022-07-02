@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { FaRegUserCircle } from 'react-icons/fa';
 import { useUserContext } from '../../contexts/UserContext';
 import options from './navbar_options';
 import './Navbar.css';
@@ -20,8 +19,8 @@ function Navbar() {
           ))}
         </ul>
         {user ? (
-          <Link to="/profile">
-            <FaRegUserCircle style={{verticalAlign: 'middle'}} size={25} />
+          <Link to="/profile" className="navbar__profile">
+            <img src={user.avatar} alt="" style={{ width: "25px", height: "25px", borderRadius: "25px" }} />
           </Link>
         ) : (
           <Link className="btn-filled navbar__login" to="/login">
